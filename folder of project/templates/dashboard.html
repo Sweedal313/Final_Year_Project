@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<div class="sidebar">
+<h2>💰 Expense</h2>
+<a href="/dashboard">Dashboard</a>
+<a href="/add_page">Add Expense</a>
+<a href="/logout">Logout</a>
+</div>
+
+<div class="main">
+
+<div class="cards">
+<div class="card total"><h3>Total</h3>₹{{ total }}</div>
+<div class="card limit"><h3>Limit</h3>₹{{ MONTH_LIMIT }}</div>
+<div class="card savings"><h3>Savings</h3>₹{{ savings }}</div>
+<div class="card alert"><h3>Alert</h3>{% for a in alerts %}{{ a }}{% endfor %}</div>
+</div>
+
+<h2>Charts</h2>
+<div class="charts">
+<img src="{{ url_for('static', filename='category_chart.png') }}">
+<img src="{{ url_for('static', filename='monthly_chart.png') }}">
+</div>
+
+<h2>Expenses</h2>
+<table>
+<tr><th>Date</th><th>Category</th><th>Amount</th><th>Alert</th></tr>
+{% for i in range(expenses|length) %}
+<tr class="{% if expense_alerts[i] %}alert-row{% endif %}">
+<td>{{ expenses[i]["date"] }}</td>
+<td>{{ expenses[i]["category"] }}</td>
+<td>{{ expenses[i]["amount"] }}</td>
+<td class="alert-icon">{{ expense_alerts[i] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h2>Category Savings</h2>
+<table>
+<tr><th>Category</th><th>Limit</th><th>Spent</th><th>Remaining</th></tr>
+{% for c in category_totals %}
+<tr>
+<td>{{ c }}</td>
+<td>{{ category_limits[c] }}</td>
+<td>{{ category_totals[c] }}</td>
+<td>{{ category_savings[c] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+</div>

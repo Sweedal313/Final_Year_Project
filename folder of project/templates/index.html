@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Expense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="expense-bg">
+
+<div class="form-box">
+
+    <h2>Add Expense</h2>
+
+    <form action="/add" method="POST">
+
+        <input type="date" name="date" required>
+
+        <input list="cat" name="category" placeholder="Select Category" required>
+        <datalist id="cat">
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Cloth</option>
+            <option>Household</option>
+            <option>Rent</option>
+            <option>Others</option>
+        </datalist>
+
+        <input type="number" name="amount" placeholder="Enter Amount" required>
+
+        <button>Add Expense</button>
+
+    </form>
+
+    <h3>Upload Bill</h3>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <button>Upload</button>
+    </form>
+
+    <br>
+
+    <a href="/dashboard" class="back-btn">⬅ Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
